@@ -2,10 +2,13 @@
 
 Board::Board(int n, int winCase):_size(n), _winCase(winCase) {
     // initialize empty board of size n * n
-    _state = new int*[n];
+    this->_state = new int*[n];
+    for (int i = 0; i < n; i++){
+        this->_state[i] = new int[n];
+    }
     for (int row = 0; row < n; row++){
         for (int col = 0; col < n; col++){
-            _state[row][col] = 0;
+            this->_state[row][col] = 0;
         }
     }
 }
@@ -20,10 +23,8 @@ bool Board::makeMove(int row, int col){
 }
 
 void Board::renderBoard () {
-    for ( int i = 0; i < this->_size; i++){
-        cout << '-';
-    }
-    cout << endl;
+    
+    cout << this->printLine();
     for (int i = 0; i < this->_size; i++){
         for (int j = 0; j < this->_size; j++){
             cout << "|";
@@ -41,8 +42,17 @@ void Board::renderBoard () {
             }
         }
         cout << "|" << endl;
+        cout << this->printLine();
     }
     return;
+}
+
+string Board::printLine(){
+    string result = "";
+    for ( int i = 0; i < this->_size*2+1; i++){
+        result += "-";
+    }
+    return(result+="\n");
 }
 
 
