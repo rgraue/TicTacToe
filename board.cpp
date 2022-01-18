@@ -14,12 +14,22 @@ Board::Board(int n, int winCase):_size(n), _winCase(winCase) {
 }
 
 Board::~Board(){
+    for (int i = 0; i < this->_size; i++){
+        delete[](this->_state[i]);
+    }
     delete[](_state);
 }
 
-bool Board::makeMove(int row, int col){
-
-    return false;
+bool Board::makeMove(int row, int col, int player){
+    if (row > this->_size || col > this->_size || row < 0 || col < 0){
+        return false;
+    }
+    if (this->_state[row-1][col-1] == 0){
+        this->_state[row-1][col-1] = player;
+    } else {
+        return false;
+    }
+    return true;
 }
 
 void Board::renderBoard () {

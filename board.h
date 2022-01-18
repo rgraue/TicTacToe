@@ -14,6 +14,6 @@ class Board {
 public:
     Board(int, int);
     ~Board();
-    bool makeMove(int, int);
+    bool makeMove(int, int, int);
     void renderBoard();
 };
