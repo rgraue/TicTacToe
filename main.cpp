@@ -29,11 +29,15 @@ int main (int args, char*  argv[]) {
                     currPlayer = 1;
                     break;
             }
+            gameOver = board->checkWinner();
         } else {
             cout << "Invalid position. Go again" << endl;
         }
         board->renderBoard();
     }
-    delete(board);
+    if (gameOver > 0){
+        cout << "Player " << gameOver << " wins" << endl;
+    }
+    board->~Board();
     return 1;
 }

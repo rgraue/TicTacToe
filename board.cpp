@@ -21,7 +21,7 @@ Board::~Board(){
 }
 
 bool Board::makeMove(int row, int col, int player){
-    if (row > this->_size || col > this->_size || row < 0 || col < 0){
+    if (row > this->_size || col > this->_size || row <= 0 || col <= 0){
         return false;
     }
     if (this->_state[row-1][col-1] == 0){
@@ -65,7 +65,30 @@ string Board::printLine(){
     return(result+="\n");
 }
 
-
-bool Board::checkWinner () {
-    return true;
+// return -1 if board is full;
+int Board::checkWinner () {
+    int currCol, currRow;
+    bool rowWin = true, colWin = true;
+    for (int i = 0; i < this->_size; i++){
+        currCol = this->_state[0][i];
+        currRow = this->_state[i][0];
+        for (int j = 0; j < this->_size; j++){
+            // check for column win
+            if (this->_state[i][j] != currCol){
+                colWin = false;
+            }
+            // check for row win
+            if (this->_state[j][i] != currRow){
+                rowWin = false;
+            }
+        }
+        if (rowWin && currRow > 0){
+            return currRow;
+        } else if (colWin && currCol > 0){
+            return currCol;
+        }
+        rowWin = true;
+        colWin = true;
+    }
+    return 0;
 }

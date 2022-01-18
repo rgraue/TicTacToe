@@ -8,7 +8,6 @@ class Board {
     int _size;
     int _winCase;
     int** _state;
-    bool checkWinner();
     string printLine();
 
 public:
@@ -16,4 +15,5 @@ public:
     ~Board();
     bool makeMove(int, int, int);
     void renderBoard();
+    int checkWinner();
 };
