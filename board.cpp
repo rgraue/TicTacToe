@@ -1,5 +1,10 @@
 #include "board.h"
-
+/**
+ * @brief Construct a new Board:: Board object
+ * 
+ * @param n         Size of the board
+ * @param winCase   Number in a row need to win
+ */
 Board::Board(int n, int winCase):_size(n), _winCase(winCase) {
     // initialize empty board of size n * n
     this->_state = new int*[n];
@@ -12,14 +17,25 @@ Board::Board(int n, int winCase):_size(n), _winCase(winCase) {
         }
     }
 }
-
+/**
+ * @brief Destroy the Board:: Board object
+ * 
+ */
 Board::~Board(){
     for (int i = 0; i < this->_size; i++){
         delete[](this->_state[i]);
     }
     delete[](_state);
 }
-
+/**
+ * @brief populates the spot with the respective player value
+ * 
+ * @param row       Row to place value
+ * @param col       Column to place value
+ * @param player    The player which is making the move
+ * @return true     If successful move
+ * @return false    if unsuccesful move
+ */
 bool Board::makeMove(int row, int col, int player){
     if (row > this->_size || col > this->_size || row <= 0 || col <= 0){
         return false;
@@ -31,9 +47,11 @@ bool Board::makeMove(int row, int col, int player){
     }
     return true;
 }
-
+/**
+ * @brief Prints the board to console
+ * 
+ */
 void Board::renderBoard () {
-    
     cout << this->printLine();
     for (int i = 0; i < this->_size; i++){
         for (int j = 0; j < this->_size; j++){
@@ -57,6 +75,11 @@ void Board::renderBoard () {
     return;
 }
 
+/**
+ * @brief Pritns the top and bottom horizontal line for the board
+ * 
+ * @return string Length of '-' chars with respect to board size
+ */
 string Board::printLine(){
     string result = "";
     for ( int i = 0; i < this->_size*2+1; i++){
@@ -65,7 +88,11 @@ string Board::printLine(){
     return(result+="\n");
 }
 
-// return -1 if board is full;
+/**
+ * @brief Checks to see if a player has won
+ * 
+ * @return int The player who won. 0 if no one wins. -1 if tie
+ */
 int Board::checkWinner () {
     int currCol, currRow;
     bool rowWin = true, colWin = true;
@@ -97,6 +124,11 @@ int Board::checkWinner () {
     return 0;
 }
 
+/**
+ * @brief Checks for diagnal wins
+ * 
+ * @return int  Value of respective player who won. -1 if no winner
+ */
 int Board::diagnalCheck(){
     int leftCheck = this->_state[0][0];
     int rightCheck = this->_state[0][this->_size-1];
