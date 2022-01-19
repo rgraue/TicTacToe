@@ -9,6 +9,7 @@ class Board {
     int _winCase;
     int** _state;
     string printLine();
+    int diagnalCheck();
 
 public:
     Board(int, int);

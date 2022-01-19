@@ -90,5 +90,32 @@ int Board::checkWinner () {
         rowWin = true;
         colWin = true;
     }
+    int diagnal = this->diagnalCheck();
+    if (diagnal > 0){
+        return diagnal;
+    }
     return 0;
+}
+
+int Board::diagnalCheck(){
+    int leftCheck = this->_state[0][0];
+    int rightCheck = this->_state[0][this->_size-1];
+    bool rightWin = true, leftWin = true;
+    // check the left Diagnal
+    for (int i = 0; i < this->_size; i++){
+        if (this->_state[i][i] != leftCheck){
+            leftWin = false;
+        }
+    }
+    for (int i = 0; i < this->_size; i++){
+        if (this->_state[i][this->_size-1-i] != rightCheck){
+            rightWin = false;
+        }
+    }
+    if (rightWin && rightCheck > 0){
+        return rightCheck;
+    } else if (leftWin && leftCheck > 0){
+        return leftCheck;
+    }
+    return -1;
 }
