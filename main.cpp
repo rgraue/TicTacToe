@@ -49,7 +49,11 @@ int main (int args, char*  argv[]) {
         board->renderBoard();
     }
     if (gameOver > 0){ // if winner
-        cout << "Player " << gameOver << " wins" << endl;
+        if (gameOver == n * n){
+            cout << "Tie" << endl;
+        } else {
+            cout << "Player " << gameOver << " wins" << endl;
+        }   
     }
     board->~Board();
     return 1;

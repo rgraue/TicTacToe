@@ -8,6 +8,7 @@ class Board {
     int _size;
     int _winCase;
     int** _state;
+    int _numMarks;
     string printLine();
     int diagnalCheck();
 

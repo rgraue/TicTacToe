@@ -5,7 +5,7 @@
  * @param n         Size of the board
  * @param winCase   Number in a row need to win
  */
-Board::Board(int n, int winCase):_size(n), _winCase(winCase) {
+Board::Board(int n, int winCase):_size(n), _winCase(winCase), _numMarks(0) {
     // initialize empty board of size n * n
     this->_state = new int*[n];
     for (int i = 0; i < n; i++){
@@ -45,6 +45,7 @@ bool Board::makeMove(int row, int col, int player){
     } else {
         return false;
     }
+    _numMarks++;
     return true;
 }
 /**
@@ -120,6 +121,9 @@ int Board::checkWinner () {
     int diagnal = this->diagnalCheck();
     if (diagnal > 0){
         return diagnal;
+    }
+    if (_numMarks == _size * _size){
+        return _numMarks;
     }
     return 0;
 }
